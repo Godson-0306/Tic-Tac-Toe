@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Connection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Connect to Online Game</h1>
+
+        <div>
+            <button id="createRoomBtn">Create Room</button>
+        </div>
+
+        <div class="join-room">
+            <input type="text" id="roomInput" placeholder="Enter Room ID">
+            <button id="joinRoomBtn">Join Room</button>
+        </div>
+    </div>
+
+    <script>
+        const createBtn = document.getElementById("createRoomBtn");
+        const joinBtn = document.getElementById("joinRoomBtn");
+        const roomInput = document.getElementById("roomInput");
+
+        createBtn.addEventListener("click", () => {
+            const roomId = Math.random().toString(36).substring(2, 8);
+            localStorage.setItem("gameId", roomId);
+            window.location.href = "online.html";
+        });
+
+        joinBtn.addEventListener("click", () => {
+            const roomId = roomInput.value.trim();
+            if (!roomId) return alert("Enter a valid Room ID");
+            localStorage.setItem("gameId", roomId);
+            window.location.href = "online.html";
+        });
+    </script>
+</body>
+
+</html>
