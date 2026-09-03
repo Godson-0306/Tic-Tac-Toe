@@ -7,7 +7,7 @@ import {
 } from "../src/game/logic";
 import type { GameStatePayload } from "../src/game/types";
 
-type Room = {
+export type Room = {
   id: string;
   board: Board;
   currentPlayer: Player;

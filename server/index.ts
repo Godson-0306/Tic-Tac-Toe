@@ -16,6 +16,7 @@ import {
   leaveRoom,
   makeMove,
   requestRematch,
+  type Room,
 } from "./rooms";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -53,8 +54,8 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   },
 });
 
-function broadcastRoom(room: { players: { X?: string; O?: string } }): void {
-  emitToRoom(room as Parameters<typeof emitToRoom>[0], (socketId, payload) => {
+function broadcastRoom(room: Room): void {
+  emitToRoom(room, (socketId, payload) => {
     io.to(socketId).emit("gameState", payload);
   });
 }

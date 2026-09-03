@@ -75,7 +75,7 @@ export function useLocalGame(mode: Mode, difficulty: Difficulty = "easy"): GameH
   }, [difficulty]);
 
   useEffect(() => {
-    if (mode !== "ai" || !gameActive || currentPlayer !== "O" || isAiThinking) {
+    if (mode !== "ai" || !gameActive || currentPlayer !== "O") {
       return;
     }
 
@@ -85,7 +85,6 @@ export function useLocalGame(mode: Mode, difficulty: Difficulty = "easy"): GameH
         const move =
           difficulty === "hard" ? getHardMove(current, "O") : getEasyMove(current);
         if (move === -1) {
-          setIsAiThinking(false);
           return current;
         }
 
@@ -97,24 +96,24 @@ export function useLocalGame(mode: Mode, difficulty: Difficulty = "easy"): GameH
           setWinningPattern(pattern);
           setGameActive(false);
           setScores((prev) => ({ ...prev, O: prev.O + 1 }));
-          setIsAiThinking(false);
           return next;
         }
 
         if (isDraw(next)) {
           setGameActive(false);
-          setIsAiThinking(false);
           return next;
         }
 
         setCurrentPlayer("X");
-        setIsAiThinking(false);
         return next;
       });
+      setIsAiThinking(false);
     }, 450);
 
-    return () => window.clearTimeout(timeout);
-  }, [mode, gameActive, currentPlayer, difficulty, isAiThinking]);
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [mode, gameActive, currentPlayer, difficulty]);
 
   const playMove = useCallback(
     (index: number) => {
