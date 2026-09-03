@@ -1,4 +1,4 @@
-import type { Board, Player } from "../game/logic";
+import type { Board, Player } from "./logic";
 
 export type GameStatePayload = {
   roomId: string;

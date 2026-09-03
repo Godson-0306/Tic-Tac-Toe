@@ -30,6 +30,12 @@ npm start
 
 The Node server serves the built SPA and WebSockets on `0.0.0.0:$PORT` (default `3001`). `GET /health` is the health check.
 
+## Deploy on Vercel
+
+The React UI (home, local, AI) deploys as a Vite static site. Client-side routes are rewritten to `index.html`.
+
+Online multiplayer needs a long-lived Socket.IO process, which Vercel does not host. For online rooms, run `npm run dev` / `npm start`, or deploy the Node server (see Render below) and set `VITE_SOCKET_URL` to that origin.
+
 ## Deploy on Render
 
 This repo includes a [`render.yaml`](render.yaml) Blueprint: one web service, `npm ci && npm run build`, then `npm start`. Rooms are in-memory, so they reset when the service restarts.

@@ -76,6 +76,7 @@ export function useLocalGame(mode: Mode, difficulty: Difficulty = "easy"): GameH
 
   useEffect(() => {
     if (mode !== "ai" || !gameActive || currentPlayer !== "O") {
+      setIsAiThinking(false);
       return;
     }
 

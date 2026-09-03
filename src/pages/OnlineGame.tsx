@@ -54,6 +54,12 @@ export function OnlineGame() {
       setPhase("left");
     });
 
+    socket.on("connect_error", () => {
+      setError(
+        "Could not reach the game server. Run npm run dev locally, or host the Node server and set VITE_SOCKET_URL.",
+      );
+    });
+
     return () => {
       socket.emit("leaveRoom");
       socket.removeAllListeners();
